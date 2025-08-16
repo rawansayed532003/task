@@ -15,17 +15,16 @@ public class CandidateAPITest {
     @Test
     public void addAndDeleteCandidateTest() {
 
-        // Base URI
         RestAssured.baseURI = "https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/recruitment";
 
-        // ----- إضافة المرشح -----
+
         String addRequestBody = "{\n" +
                 "  \"firstName\": \"test\",\n" +
                 "  \"lastName\": \"y\",\n" +
                 "  \"email\": \"admin@example.com\",\n" +
                 "  \"contactNumber\": \"0100000000\",\n" +
                 "  \"vacancyId\": 5,\n" +
-                "  \"keywords\": \"automation, testing\",\n" +
+                "  \"keywords\": \"automation testing\",\n" +
                 "  \"consentToKeepData\": true\n" +
                 "}";
 
