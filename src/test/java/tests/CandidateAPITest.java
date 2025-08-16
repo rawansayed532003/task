@@ -15,7 +15,12 @@ public class CandidateAPITest {
     @Test
     public void addAndDeleteCandidateTest() {
 
+
         RestAssured.baseURI = "https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/recruitment";
+
+
+        String cookie = "\n" +
+                "orangehrm=dc02jubnkiuesep5kumbq70mms";
 
 
         String addRequestBody = "{\n" +
@@ -28,9 +33,10 @@ public class CandidateAPITest {
                 "  \"consentToKeepData\": true\n" +
                 "}";
 
+
         Response addResponse = given()
                 .header("Content-Type", "application/json")
-                .header("Cookie", "orangehrm=gugsbo7mdt57ihe4id1u4ste6g") // ضعي الكوكي هنا
+                .header("Cookie", cookie)
                 .body(addRequestBody)
                 .when()
                 .post("/candidates")
@@ -40,14 +46,14 @@ public class CandidateAPITest {
         logger.info("Add Status Code: {}", addResponse.statusCode());
         logger.info("Add Response Body: {}", addResponse.asString());
 
-        // جلب الـ ID للمرشح المضاف
+
         int candidateId = addResponse.jsonPath().getInt("data.id");
         logger.info("Candidate ID to delete: {}", candidateId);
 
-        // ----- حذف المرشح -----
+        // م DELETE endpoint غير مدعوم من قبل API لذلك حذف الـ candidate غير ممكن
         Response deleteResponse = given()
                 .header("Content-Type", "application/json")
-                .header("Cookie", "orangehrm=gugsbo7mdt57ihe4id1u4ste6g")
+                .header("Cookie", cookie)
                 .when()
                 .delete("/candidates/" + candidateId)
                 .then()
